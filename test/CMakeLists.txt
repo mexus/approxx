@@ -11,4 +11,5 @@ add_executable(approxx-test
         ../source/approxx/approximation.cpp
         ../source/approxx/analytic/constant_approximation.cpp
         ../source/approxx/analytic/linear_approximation.cpp
+        ../source/approxx/numeric/exponent_approximation.cpp
 )
