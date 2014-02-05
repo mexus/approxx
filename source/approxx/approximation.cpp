@@ -73,7 +73,7 @@ namespace approxx {
 
         bool Approximation::CheckConversion(const std::tuple<double, double>& conversion, const std::string& label) {
                 S_LOG("CheckConversion");
-                static const double minMultiplier = 1E-5;
+                static const double minMultiplier = 1E-10;
                 double c0 = std::abs(std::get<0>(conversion));
                 if (c0 < minMultiplier){
                         log(logxx::error) << "Conversion multiplier for " << label << " should be at least " << minMultiplier << 

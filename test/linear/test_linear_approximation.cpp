@@ -3,12 +3,6 @@
 #include <stdlib.h>
 
 logxx::Log TestLinearApproximation::cLog("TestLinearApproximation");
-//const double TestLinearApproximation::start;
-//const double TestLinearApproximation::end;
-//const double TestLinearApproximation::step;
-
-
-
 
 TestLinearApproximation::TestLinearApproximation() : TestFW("Linear approximation") {
         std::srand(time(NULL));
@@ -18,7 +12,7 @@ TestLinearApproximation::~TestLinearApproximation() {
 }
 
 bool TestLinearApproximation::Tests() {
-        static const int tests = 10;
+        static const int tests = 10000;
         return TestConstants(tests) && TestLinears(tests);
 }
 
@@ -50,8 +44,8 @@ bool TestLinearApproximation::TestLinears(int tests) {
 }
 
 double TestLinearApproximation::Random() {
-        static const double minValue = -1E3;
-        static const double maxValue = 1E3;
+        static const double minValue = -1E7;
+        static const double maxValue = 1E7;
         double normalized = static_cast<double>(std::rand()) / (RAND_MAX + 1.0);
         return minValue + normalized * (maxValue - minValue);
 }
@@ -59,7 +53,6 @@ double TestLinearApproximation::Random() {
 bool TestLinearApproximation::Cmp(double x, double y) {
         return approxx::Approximation::Cmp(x, y);
 }
-
 
 bool TestLinearApproximation::Test(double constant) {
         S_LOG("Test constant");
