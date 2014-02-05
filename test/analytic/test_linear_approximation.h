@@ -2,7 +2,7 @@
 #define	TEST_LINEAR_APPROXIMATION_H
 
 #include "../test_fw.h"
-#include "../../source/approxx/constant/constant_approximation.h"
+#include "../../source/approxx/approximation.h"
 
 class TestLinearApproximation : public TestFW {
 public:

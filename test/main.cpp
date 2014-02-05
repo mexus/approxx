@@ -4,8 +4,8 @@
 #include "../source/logxx/logxx.h"
 logxx::Log log("main");
 
-#include "constant/test_constant_approximation.h"
-#include "linear/test_linear_approximation.h"
+#include "analytic/test_constant_approximation.h"
+#include "analytic/test_linear_approximation.h"
 
 
 std::map<std::shared_ptr<TestFW>, bool> tests;

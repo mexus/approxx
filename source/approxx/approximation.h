@@ -60,8 +60,8 @@ namespace approxx {
 
 #include "approximation.tcc"
 
-#include "constant/constant_approximation.h"
-#include "linear/linear_approximation.h"
+#include "analytic/constant_approximation.h"
+#include "analytic/linear_approximation.h"
 
 #endif	/* APPROXIMATION_H */
 
