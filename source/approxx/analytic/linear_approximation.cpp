@@ -37,9 +37,8 @@ namespace approxx {
                         coeffScale = (gamma * phi - beta * psi) / determinant;
                         coefShift = (-beta * phi + alpha * psi) / determinant;
                         
-                        return CalculateAbsoluteError();
+                        return CalculateRelativeError();
                 }
-//                return std::numeric_limits<double>::quiet_NaN();
         }
 
 

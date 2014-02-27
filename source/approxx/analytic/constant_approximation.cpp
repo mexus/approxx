@@ -22,10 +22,8 @@ namespace approxx {
                         for (auto &v : values){
                                 meanValue += v * sizeInversed;
                         }
-//                        return CalculateAbsoluteError([this](double)->double{
-//                                return meanValue;
-//                        });
-                        return CalculateAbsoluteError();
+                        
+                        return CalculateRelativeError();
                 }
         }
 

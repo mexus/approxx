@@ -28,6 +28,7 @@ namespace approxx {
                 const double minKeyInterval;
                 
                 static double Cmp(double, double);
+                void PrintData() const;
         protected:
                 virtual double RelativeGet(double) const = 0;
 
@@ -46,7 +47,7 @@ namespace approxx {
                 static double Sqr(double);
                 static double Sqrt(double);
                 
-                double CalculateAbsoluteError(const std::function<double(double)>& = nullptr) const;
+                double CalculateRelativeError(const std::function<double(double)>& = nullptr) const;
         private:
 
                 bool CheckKeyInterval(std::vector<double>::iterator firstGreater, double key) const;
