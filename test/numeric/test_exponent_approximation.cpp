@@ -18,8 +18,8 @@ bool TestExponentApproximation::Tests() {
         static const unsigned int tests = 5;
         static const unsigned int points = 20;
         for (unsigned int i = 0; i < tests; ++i){
-                double a = rnd(0.0, 0.5);
-                double b = rnd(0.0, 10.0);
+                double a = rnd(-0.5, 0.5);
+                double b = rnd(-10.0, 10.0);
                 double c = rnd(-1E2, 1E2);
                 log(logxx::notice) << "Testing f(x) = " << a << "exp(" << b << "x) + " << c << logxx::endl;
                 

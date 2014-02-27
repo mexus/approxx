@@ -41,9 +41,9 @@ namespace approxx{
 //                                if (i != N0 - 1)
 //                                        s << ", ";
 //                        }
-//                        s << "}" << logxx::endl;;
+//                        s << "}" << logxx::endl;
                         
-                        size_t roughN = 10;
+                        size_t roughN = 1E3;
                         
                         currentMode = straight;
                         double straightCoeff(0.0);
@@ -80,8 +80,8 @@ namespace approxx{
                 double from = startFrom;
                 double to = startTo;
                 double error(0.0);
-                for (int i = 0; i < 10; ++i){
-                        size_t N = 10;
+                for (int i = 0; i < 1E4; ++i){
+                        size_t N = 100;
                         double optimalCoef(0.0);
                         error = FindRoughCoefficient(optimalCoef, N, from, to);
                         from = optimalCoef - 1.0 / N;
