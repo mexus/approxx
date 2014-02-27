@@ -4,7 +4,7 @@
 
 logxx::Log TestLinearApproximation::cLog("TestLinearApproximation");
 
-TestLinearApproximation::TestLinearApproximation() : TestFW("Linear approximation") {
+TestLinearApproximation::TestLinearApproximation() : TestFW("linear") {
         std::srand(time(NULL));
 }
 
@@ -18,7 +18,7 @@ bool TestLinearApproximation::Tests() {
 
 bool TestLinearApproximation::TestConstants(int tests) {
         S_LOG("TestConstants");
-        log(logxx::info) << "Testing approximation of constants" << logxx::endl;
+        log(logxx::notice) << "Testing approximation of constants" << logxx::endl;
         for(int i = 0; i < tests; ++i){
                 double a = Random();
                 double b = Random();
@@ -32,7 +32,7 @@ bool TestLinearApproximation::TestConstants(int tests) {
 
 bool TestLinearApproximation::TestLinears(int tests) {
         S_LOG("TestLinear");
-        log(logxx::info) << "Testing approximation of linear functions" << logxx::endl;
+        log(logxx::notice) << "Testing approximation of linear functions" << logxx::endl;
         for(int i = 0; i < tests; ++i){
                 double c = Random();
                 if (!Test(c)){

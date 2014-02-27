@@ -59,12 +59,10 @@ int main(int argc, char **argv) {
         logxx::GlobalLogLevel(logxx::warning);
         bool res(true);
         
-        AddTest<TestConstantApproximation>(false);
-        AddTest<TestLinearApproximation>(false);
+        AddTest<TestConstantApproximation>(true);
+        AddTest<TestLinearApproximation>(true);
         AddTest<TestExponentApproximation>(true);
         
-//        if (argc < 2)
-//                SetAll(true);
         if (argc > 1) {
                 for (int i = 1; i < argc; ++i){
                         std::string arg(argv[i]);

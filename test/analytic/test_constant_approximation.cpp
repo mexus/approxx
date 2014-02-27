@@ -4,7 +4,7 @@
 logxx::Log TestConstantApproximation::cLog("TestConstantApproximation");
 
 
-TestConstantApproximation::TestConstantApproximation() : TestFW("Constant approximation")
+TestConstantApproximation::TestConstantApproximation() : TestFW("constant")
 {
 }
 
@@ -38,11 +38,11 @@ bool TestConstantApproximation::Tests() {
 
 bool TestConstantApproximation::Test(const std::string& label, const std::map<double, double>& set, double mean, double maxError) {
         D_LOG("Test");
-        log(logxx::info, label) << "Start test" << logxx::endl;
+        log(logxx::notice, label) << "Start test" << logxx::endl;
         BasicApproximation approx;
         bool res = Load(approx, set) && TestValues(approx, set) && TestResult(approx, mean, maxError);
         
-        auto &s = log(logxx::info, label);
+        auto &s = log(logxx::notice, label);
         if (res)
                 s << "Ok";
         else
@@ -94,7 +94,7 @@ bool TestConstantApproximation::TestResult(BasicApproximation& approx, double me
                         maxError << logxx::endl;
                 return false;
         } else {
-                log(logxx::info) << "Approximated value: " << approximated << ", approximation error: "
+                log(logxx::notice) << "Approximated value: " << approximated << ", approximation error: "
                         << approxError << logxx::endl;
                 return true;
         }
