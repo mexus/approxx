@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <tuple>
+#include <functional>
 
 #include "../logxx/logxx.h"
 
@@ -45,9 +46,7 @@ namespace approxx {
                 static double Sqr(double);
                 static double Sqrt(double);
                 
-                template<class Function>
-                double CalculateAbsoluteError(Function f) const;
-                double CalculateAbsoluteError() const;
+                double CalculateAbsoluteError(const std::function<double(double)>& = nullptr) const;
         private:
 
                 bool CheckKeyInterval(std::vector<double>::iterator firstGreater, double key) const;

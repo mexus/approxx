@@ -6,6 +6,7 @@ add_executable(approxx-test
         test_fw.cpp
         analytic/test_constant_approximation.cpp
         analytic/test_linear_approximation.cpp
+        numeric/test_exponent_approximation.cpp
 
 	../source/logxx/logxx.cpp
         ../source/approxx/approximation.cpp

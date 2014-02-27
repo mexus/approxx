@@ -6,6 +6,7 @@ logxx::Log log("main");
 
 #include "analytic/test_constant_approximation.h"
 #include "analytic/test_linear_approximation.h"
+#include "numeric/test_exponent_approximation.h"
 
 
 std::map<std::shared_ptr<TestFW>, bool> tests;
@@ -58,12 +59,13 @@ int main(int argc, char **argv) {
         logxx::GlobalLogLevel(logxx::warning);
         bool res(true);
         
-        AddTest<TestConstantApproximation>(true);
-        AddTest<TestLinearApproximation>(true);
+        AddTest<TestConstantApproximation>(false);
+        AddTest<TestLinearApproximation>(false);
+        AddTest<TestExponentApproximation>(true);
         
-        if (argc < 2)
-                SetAll(true);
-        else {
+//        if (argc < 2)
+//                SetAll(true);
+        if (argc > 1) {
                 for (int i = 1; i < argc; ++i){
                         std::string arg(argv[i]);
                         if (arg == "all")

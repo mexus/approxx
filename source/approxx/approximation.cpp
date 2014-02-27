@@ -136,13 +136,14 @@ namespace approxx {
                 return keys.size();
         }
 
-        double Approximation::CalculateAbsoluteError() const {
+        double Approximation::CalculateAbsoluteError(const std::function<double(double)>& f) const {
+                const std::function<double(double)> function = f ? f : [this](double x){return RelativeGet(x);};
                 double normDiff(0.0);
                 size_t N = keys.size();
                 for (size_t i = 0; i < N; ++i){
                         double x = keys[i];
                         double etalon = values[i];
-                        double approximation = RelativeGet(x);
+                        double approximation = function(x);
                         
                         normDiff += Sqr(etalon - approximation);
                 }

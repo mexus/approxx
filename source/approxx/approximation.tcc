@@ -56,21 +56,6 @@ namespace approxx {
                 }
         }
         
-        
-        template<class Function>
-        double Approximation::CalculateAbsoluteError(Function f) const{
-                double normDiff(0.0);
-                size_t N = keys.size();
-                for (size_t i = 0; i < N; ++i){
-                        double x = keys[i];
-                        double etalon = values[i];
-                        double approximation = f(x);
-                        
-                        normDiff += Sqr(etalon - approximation);
-                }
-                return Sqrt(normDiff) / Abs(std::get<0>(valuesConversion));
-        }
-        
 } // namespace approxx
 
 #endif	/* APPROXIMATION_TCC */

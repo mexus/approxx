@@ -17,13 +17,16 @@ namespace approxx {
                 
                 static double Exponent(double x, double a);
                 
-                enum mode {
+                enum Mode {
                         straight,
                         inverse
                 } currentMode;
                 
                 static logxx::Log cLog;
                 double coeff = 0.0;
+                
+                double FindRoughCoefficient(double& optimalCoeff, size_t N, double from = -100.0, double to = 100.0);
+                double FindByDivisions(double from, double to);
 
         };
 
