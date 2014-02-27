@@ -25,8 +25,9 @@ namespace approxx {
                 static logxx::Log cLog;
                 double coeff = 0.0;
                 
-                double FindRoughCoefficient(double& optimalCoeff, size_t N, double from = -100.0, double to = 100.0);
-                double FindByDivisions(double from, double to);
+                double FindRoughCoefficient(double& optimalCoeff, size_t N, double from = -500.0, double to = 500.0);
+                //double FindByDivisions(double from, double to);
+                double FindByDivisions(double step0);
 
         };
 

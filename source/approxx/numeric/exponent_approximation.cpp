@@ -23,7 +23,7 @@ namespace approxx{
                 if (currentMode == straight)
                         return Exponent(x, coeff);
                 else if (currentMode == inverse)
-                        return -Exponent(1.0 - x, -coeff);
+                        return Exponent(1.0 - x, coeff);
                 else
                         throw std::logic_error("Unknown mode: " + std::to_string(currentMode));
         }
@@ -34,16 +34,7 @@ namespace approxx{
                 currentMode = straight;
                 if (values.size() >= 2){
                         
-//                        auto &s = log(logxx::notice, "Pairs") << "{";
-//                        size_t N0 = values.size();
-//                        for (size_t i = 0; i < N0; ++i){
-//                                s << "{" << keys[i] << ", " << values[i] << "}";
-//                                if (i != N0 - 1)
-//                                        s << ", ";
-//                        }
-//                        s << "}" << logxx::endl;
-                        
-                        size_t roughN = 1E3;
+                        size_t roughN = 1E4;
                         
                         currentMode = straight;
                         double straightCoeff(0.0);
@@ -56,7 +47,7 @@ namespace approxx{
                         currentMode = (straightError < inverseError) ? straight : inverse;
                         coeff = (straightError < inverseError) ? straightCoeff : inverseCoeff;
                         
-                        return FindByDivisions(coeff - 1.0 / roughN, coeff + 1.0 / roughN);
+                        return FindByDivisions(1.0 / roughN);
                 } else {
                         log(logxx::warning) << "There should be at least two values" << logxx::endl;
                         return 0.0;
@@ -65,9 +56,10 @@ namespace approxx{
 
         double ExponentApproximation::FindRoughCoefficient(double& optimalCoeff, size_t N, double from, double to) {
                 double miminalError = std::numeric_limits<double>::max();
+                double step = (to - from) / static_cast<double>(N - 1);
                 for (size_t i = 0; i < N; ++i){
-                        coeff = from + static_cast<double>(i) / static_cast<double>(N - 1) * (to - from);
-                        double error = CalculateAbsoluteError();
+                        coeff = from + i * step ;
+                        double error = CalculateRelativeError();
                         if (error < miminalError){
                                 miminalError = error;
                                 optimalCoeff = coeff;
@@ -76,18 +68,26 @@ namespace approxx{
                 return miminalError;
         }
 
-        double ExponentApproximation::FindByDivisions(double startFrom, double startTo) {
-                double from = startFrom;
-                double to = startTo;
-                double error(0.0);
-                for (int i = 0; i < 1E4; ++i){
-                        size_t N = 100;
-                        double optimalCoef(0.0);
-                        error = FindRoughCoefficient(optimalCoef, N, from, to);
-                        from = optimalCoef - 1.0 / N;
-                        to = optimalCoef + 1.0 / N;
+        double ExponentApproximation::FindByDivisions(double step0) {
+                double step = step0;
+                static const double minDifference = 1E-5;
+                static const unsigned int maxDivisions = 1000;
+                static const double stepDivision = 0.5;
+                
+                unsigned int divisions(0);
+                double prevY = CalculateRelativeError();
+                while (divisions < maxDivisions){
+                        coeff = coeff + step;
+                        double newY = CalculateRelativeError();
+                        if (fabs(newY - prevY) < minDifference){
+                                break ;
+                        } else if (newY > prevY){
+                                step *= -stepDivision;
+                                ++divisions;
+                        }
+                        prevY = newY;
                 }
-                return error;
+                return prevY;
         }
 
 } // namespace approxx
