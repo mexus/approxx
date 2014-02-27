@@ -1,4 +1,5 @@
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0") #debug
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3") #release
 
 add_executable(approxx-test
         main.cpp
@@ -13,4 +14,5 @@ add_executable(approxx-test
         ../source/approxx/analytic/constant_approximation.cpp
         ../source/approxx/analytic/linear_approximation.cpp
         ../source/approxx/numeric/exponent_approximation.cpp
+        ../source/approxx/numeric/numeric_approximation.cpp
 )

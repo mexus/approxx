@@ -1,4 +1,5 @@
 #include "exponent_approximation.h"
+#include "numeric_approximation.h"
 #include <cmath>
 
 namespace approxx{
@@ -55,39 +56,22 @@ namespace approxx{
         }
 
         double ExponentApproximation::FindRoughCoefficient(double& optimalCoeff, size_t N, double from, double to) {
-                double miminalError = std::numeric_limits<double>::max();
-                double step = (to - from) / static_cast<double>(N - 1);
-                for (size_t i = 0; i < N; ++i){
-                        coeff = from + i * step ;
-                        double error = CalculateRelativeError();
-                        if (error < miminalError){
-                                miminalError = error;
-                                optimalCoeff = coeff;
-                        }
-                }
-                return miminalError;
+                auto testFunction = [this](double x)->double{
+                        coeff = x;
+                        return CalculateRelativeError();
+                };
+                return RoughOptimization(testFunction, from, to, optimalCoeff, N);
         }
 
         double ExponentApproximation::FindByDivisions(double step0) {
-                double step = step0;
-                static const double minDifference = 1E-5;
-                static const unsigned int maxDivisions = 1000;
-                static const double stepDivision = 0.5;
-                
-                unsigned int divisions(0);
-                double prevY = CalculateRelativeError();
-                while (divisions < maxDivisions){
-                        coeff = coeff + step;
-                        double newY = CalculateRelativeError();
-                        if (fabs(newY - prevY) < minDifference){
-                                break ;
-                        } else if (newY > prevY){
-                                step *= -stepDivision;
-                                ++divisions;
-                        }
-                        prevY = newY;
-                }
-                return prevY;
+                auto testFunction = [this](double x)->double{
+                        coeff = x;
+                        return CalculateRelativeError();
+                };
+                double optimal(0.0);
+                double error = OptimizeByDivisions(testFunction, coeff, step0, optimal);
+                coeff = optimal;
+                return error;
         }
 
 } // namespace approxx
